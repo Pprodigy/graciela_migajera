@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Ya te bañaste hoy?</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://i.imgur.com/9j3pUqf.gif') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 8px black;
+      margin-bottom: 40px;
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    button {
+      padding: 20px 40px;
+      font-size: 1.5em;
+      border: 2px solid white;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 15px red;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px crimson;
+    }
+
+    #yesBtn {
+      background-color: rgba(0, 128, 0, 0.7);
+    }
+
+    #noBtn {
+      background-color: rgba(128, 0, 0, 0.7);
+    }
+
+    #message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      font-size: 2em;
+      color: #ff3333;
+      display: none;
+      text-align: center;
+      animation: popIn 0.5s ease;
+      box-shadow: 0 0 30px crimson;
+      z-index: 10;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      .btn-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      button {
+        padding: 15px 30px;
+        font-size: 1.2em;
+      }
+
+      #message {
+        font-size: 1.5em;
+        padding: 25px;
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <audio autoplay loop>
+    <source src="https://www.myinstants.com/media/sounds/friday-the-13th-theme.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <h1>¿Ya te bañaste hoy?</h1>
+
+  <div class="btn-container">
+    <button id="yesBtn">Sí 😌</button>
+    <button id="noBtn">No 😳</button>
+  </div>
+
+  <div id="message">Ya sabía que eras cochinita, feliz viernes 13 😈🔪</div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const message = document.getElementById('message');
+
+    noBtn.addEventListener('click', () => {
+      message.innerText = "Ya sabía que eras cochinita, feliz viernes 13 😈🔪";
+      message.style.display = 'block';
+    });
+
+    // Ahora el botón que huye es el "sí"
+    function moveYesBtnFarAway() {
+      const maxX = window.innerWidth - yesBtn.offsetWidth;
+      const maxY = window.innerHeight - yesBtn.offsetHeight;
+      let newLeft = Math.random() * maxX;
+      let newTop = Math.random() * maxY;
+
+      const currentRect = yesBtn.getBoundingClientRect();
+      const dx = newLeft - currentRect.left;
+      const dy = newTop - currentRect.top;
+      if (Math.abs(dx) < 150) newLeft = (newLeft + 150) % maxX;
+      if (Math.abs(dy) < 150) newTop = (newTop + 150) % maxY;
+
+      yesBtn.style.position = 'fixed';
+      yesBtn.style.left = `${newLeft}px`;
+      yesBtn.style.top = `${newTop}px`;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = yesBtn.getBoundingClientRect();
+      const dist = Math.hypot(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
+      if (dist < 120) {
+        moveYesBtnFarAway();
+      }
+    });
+
+    yesBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveYesBtnFarAway();
+    });
+  </script>
+
+</body>
+</html>
