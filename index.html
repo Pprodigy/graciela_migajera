@@ -2,14 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>¿Te bañaste hoy?</title>
+  <title>Para Graciela</title>
+  <!-- Etiquetas Open Graph para WhatsApp -->
+<meta property="og:title" content="Para Graciela 💀🩸">
+<meta property="og:description" content="¿Ya te bañaste hoy? Feliz viernes 13 😈">
+<meta property="og:image" content="https://pprodigy.github.io/graciela_migajera/image/foto1.png">
+<meta property="og:url" content="https://pprodigy.github.io/graciela_migajera/">
+<meta property="og:type" content="website">
+</head>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: url('image/foto1.png') no-repeat center center fixed;
-      background-size: contain;
+      background-size: cover;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -17,13 +24,13 @@
       justify-content: center;
       overflow: hidden;
       text-align: center;
+      color: white;
     }
 
     h1 {
-      color: #fff;
       font-size: 3em;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-      margin-bottom: 50px;
+      text-shadow: 2px 2px 8px black;
+      margin-bottom: 40px;
     }
 
     .btn-container {
@@ -38,22 +45,27 @@
     button {
       padding: 20px 40px;
       font-size: 1.5em;
-      border: none;
-      border-radius: 40px;
+      border: 2px solid white;
+      border-radius: 15px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       position: relative;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 15px red;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px crimson;
     }
 
     #yesBtn {
-      background-color: #ff6f91;
-      color: white;
+      background-color: rgba(0, 128, 0, 0.7);
     }
 
     #noBtn {
-      background-color: #6c757d;
-      color: white;
+      background-color: rgba(128, 0, 0, 0.7);
     }
 
     #message {
@@ -61,24 +73,16 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: white;
+      background: rgba(0, 0, 0, 0.9);
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      font-size: 1.5em;
-      color: #e75480;
+      font-size: 2em;
+      color: #ff3333;
       display: none;
       text-align: center;
       animation: popIn 0.5s ease;
+      box-shadow: 0 0 30px crimson;
       z-index: 10;
-      max-width: 90%;
-    }
-
-    #message img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 10px;
-      margin-bottom: 20px;
     }
 
     @keyframes popIn {
@@ -95,7 +99,6 @@
     @media (max-width: 600px) {
       h1 {
         font-size: 2em;
-        margin: 20px;
       }
 
       .btn-container {
@@ -109,44 +112,45 @@
       }
 
       #message {
-        font-size: 1.2em;
+        font-size: 1.5em;
         padding: 25px;
-      }
-
-      #message img {
-        max-width: 90%;
+        width: 80%;
       }
     }
   </style>
 </head>
 <body>
 
-  <audio autoplay loop>
+  <audio id="bgMusic" autoplay loop>
     <source src="music/viernes13.mp3" type="audio/mpeg">
     Tu navegador no soporta audio HTML5.
   </audio>
 
-  <audio id="audio1" src="music/musica2.mp3"></audio>
-  <audio id="audio2" src="music/viernes13.mp3"></audio>
+  <audio id="soundEffect">
+    <source src="music/viernes13.mp3" type="audio/mpeg">
+  </audio>
 
   <h1>¿Ya te bañaste hoy?</h1>
 
   <div class="btn-container">
-    <button id="yesBtn">Sí 😇</button>
-    <button id="noBtn">No 😈</button>
+    <button id="yesBtn">Sí 😌</button>
+    <button id="noBtn">No 😳</button>
   </div>
 
-  <div id="message">
-    <img src="image/foto2.png" alt="Imagen divertida">
-    <span>Ya sabía que eras cochinita, feliz viernes 13</span>
-  </div>
+  <div id="message">Ya sabía que eras cochinita, feliz viernes 13 😈🔪</div>
 
   <script>
-    const noBtn = document.getElementById('noBtn');
     const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
     const message = document.getElementById('message');
-    const audio1 = document.getElementById('audio1');
-    const audio2 = document.getElementById('audio2');
+    const soundEffect = document.getElementById('soundEffect');
+
+    noBtn.addEventListener('click', () => {
+      message.innerText = "Ya sabía que eras cochinita, feliz viernes 13 😈🔪";
+      message.style.display = 'block';
+      soundEffect.currentTime = 0;
+      soundEffect.play();
+    });
 
     function moveYesBtnFarAway() {
       const maxX = window.innerWidth - yesBtn.offsetWidth;
@@ -157,26 +161,25 @@
       const currentRect = yesBtn.getBoundingClientRect();
       const dx = newLeft - currentRect.left;
       const dy = newTop - currentRect.top;
-      if (Math.abs(dx) < 200) newLeft = (newLeft + 200) % maxX;
-      if (Math.abs(dy) < 200) newTop = (newTop + 200) % maxY;
+      if (Math.abs(dx) < 150) newLeft = (newLeft + 150) % maxX;
+      if (Math.abs(dy) < 150) newTop = (newTop + 150) % maxY;
 
       yesBtn.style.position = 'fixed';
       yesBtn.style.left = `${newLeft}px`;
       yesBtn.style.top = `${newTop}px`;
     }
 
-    yesBtn.addEventListener('mouseover', moveYesBtnFarAway);
-    yesBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      moveYesBtnFarAway();
+    document.addEventListener('mousemove', (e) => {
+      const rect = yesBtn.getBoundingClientRect();
+      const dist = Math.hypot(e.clientX - (rect.left + rect.width / 2), e.clientY - (rect.top + rect.height / 2));
+      if (dist < 120) {
+        moveYesBtnFarAway();
+      }
     });
 
-    noBtn.addEventListener('click', () => {
-      message.style.display = 'block';
-      audio1.play();
-      audio1.onended = () => {
-        audio2.play();
-      };
+    yesBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveYesBtnFarAway();
     });
   </script>
 
