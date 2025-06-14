@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <title>Para Graciela</title>
   <!-- Etiquetas Open Graph para WhatsApp -->
-<meta property="og:title" content="Para Graciela 💀🩸">
-<meta property="og:description" content="¿Ya te bañaste hoy? Feliz viernes 13 😈">
-<meta property="og:image" content="https://pprodigy.github.io/graciela_migajera/image/foto1.png">
-<meta property="og:url" content="https://pprodigy.github.io/graciela_migajera/">
-<meta property="og:type" content="website">
-</head>
+  <meta property="og:title" content="Para Graciela 💀🩸">
+  <meta property="og:description" content="¿Ya te bañaste hoy? Feliz viernes 13 😈">
+  <meta property="og:image" content="https://pprodigy.github.io/graciela_migajera/image/foto1.png">
+  <meta property="og:url" content="https://pprodigy.github.io/graciela_migajera/">
+  <meta property="og:type" content="website">
   <style>
     body {
       margin: 0;
@@ -74,7 +73,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background: rgba(0, 0, 0, 0.9);
-      padding: 40px;
+      padding: 0;
       border-radius: 20px;
       font-size: 2em;
       color: #ff3333;
@@ -83,6 +82,19 @@
       animation: popIn 0.5s ease;
       box-shadow: 0 0 30px crimson;
       z-index: 10;
+      overflow: hidden;
+    }
+
+    #message img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    #message-text {
+      padding: 30px 20px;
     }
 
     @keyframes popIn {
@@ -113,8 +125,11 @@
 
       #message {
         font-size: 1.5em;
-        padding: 25px;
-        width: 80%;
+        width: 95%;
+      }
+
+      #message-text {
+        padding: 20px;
       }
     }
   </style>
@@ -126,7 +141,11 @@
     Tu navegador no soporta audio HTML5.
   </audio>
 
-  <audio id="soundEffect">
+  <audio id="audio1">
+    <source src="music/musica2.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="audio2">
     <source src="music/viernes13.mp3" type="audio/mpeg">
   </audio>
 
@@ -137,19 +156,26 @@
     <button id="noBtn">No 😳</button>
   </div>
 
-  <div id="message">Ya sabía que eras cochinita, feliz viernes 13 😈🔪</div>
+  <div id="message">
+    <img src="image/foto4.png" alt="Imagen sorpresa">
+    <div id="message-text">Ya sabía que eras cochinita, feliz viernes 13 😈🔪</div>
+  </div>
 
   <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const message = document.getElementById('message');
-    const soundEffect = document.getElementById('soundEffect');
+    const audio1 = document.getElementById('audio1');
+    const audio2 = document.getElementById('audio2');
 
     noBtn.addEventListener('click', () => {
-      message.innerText = "Ya sabía que eras cochinita, feliz viernes 13 😈🔪";
       message.style.display = 'block';
-      soundEffect.currentTime = 0;
-      soundEffect.play();
+      audio1.currentTime = 0;
+      audio1.play();
+      audio1.onended = () => {
+        audio2.currentTime = 0;
+        audio2.play();
+      };
     });
 
     function moveYesBtnFarAway() {
