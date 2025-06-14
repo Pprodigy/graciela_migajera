@@ -114,9 +114,13 @@
 </head>
 <body>
 
-  <audio autoplay loop>
+  <audio id="bgMusic" autoplay loop>
     <source src="music/viernes13.mp3" type="audio/mpeg">
     Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <audio id="soundEffect">
+    <source src="music/viernes13.mp3" type="audio/mpeg">
   </audio>
 
   <h1>¿Ya te bañaste hoy?</h1>
@@ -132,13 +136,15 @@
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const message = document.getElementById('message');
+    const soundEffect = document.getElementById('soundEffect');
 
     noBtn.addEventListener('click', () => {
       message.innerText = "Ya sabía que eras cochinita, feliz viernes 13 😈🔪";
       message.style.display = 'block';
+      soundEffect.currentTime = 0;
+      soundEffect.play();
     });
 
-    // El botón que huye es el "sí"
     function moveYesBtnFarAway() {
       const maxX = window.innerWidth - yesBtn.offsetWidth;
       const maxY = window.innerHeight - yesBtn.offsetHeight;
@@ -172,3 +178,4 @@
 
 </body>
 </html>
+
