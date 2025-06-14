@@ -69,17 +69,15 @@
 
     #message {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       background: rgba(0, 0, 0, 0.9);
-      padding: 0;
-      border-radius: 20px;
       font-size: 2em;
       color: #ff3333;
       display: none;
       text-align: center;
-      animation: popIn 0.5s ease;
       box-shadow: 0 0 30px crimson;
       z-index: 10;
       overflow: hidden;
@@ -89,23 +87,10 @@
       width: 100%;
       height: auto;
       display: block;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
     }
 
     #message-text {
       padding: 30px 20px;
-    }
-
-    @keyframes popIn {
-      from {
-        transform: translate(-50%, -50%) scale(0.5);
-        opacity: 0;
-      }
-      to {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-      }
     }
 
     @media (max-width: 600px) {
@@ -125,11 +110,6 @@
 
       #message {
         font-size: 1.5em;
-        width: 95%;
-      }
-
-      #message-text {
-        padding: 20px;
       }
     }
   </style>
@@ -141,11 +121,11 @@
     Tu navegador no soporta audio HTML5.
   </audio>
 
-  <audio id="audio1">
+  <audio id="musica2">
     <source src="music/musica2.mp3" type="audio/mpeg">
   </audio>
 
-  <audio id="audio2">
+  <audio id="soundEffect">
     <source src="music/viernes13.mp3" type="audio/mpeg">
   </audio>
 
@@ -157,7 +137,7 @@
   </div>
 
   <div id="message">
-    <img src="image/foto4.png" alt="Imagen sorpresa">
+    <img src="image/foto4.png" alt="Susto">
     <div id="message-text">Ya sabía que eras cochinita, feliz viernes 13 😈🔪</div>
   </div>
 
@@ -165,16 +145,17 @@
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const message = document.getElementById('message');
-    const audio1 = document.getElementById('audio1');
-    const audio2 = document.getElementById('audio2');
+    const musica2 = document.getElementById('musica2');
+    const soundEffect = document.getElementById('soundEffect');
 
     noBtn.addEventListener('click', () => {
       message.style.display = 'block';
-      audio1.currentTime = 0;
-      audio1.play();
-      audio1.onended = () => {
-        audio2.currentTime = 0;
-        audio2.play();
+      musica2.currentTime = 0;
+      musica2.play();
+
+      musica2.onended = () => {
+        soundEffect.currentTime = 0;
+        soundEffect.play();
       };
     });
 
@@ -211,3 +192,4 @@
 
 </body>
 </html>
+
